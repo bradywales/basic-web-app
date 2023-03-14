@@ -42,5 +42,30 @@ export default function QueryProcessor(query: string): string {
     const prod = numbers.reduce((acc, cur) => acc * cur, 1);
     return prod.toString();
   }
+  if (query.startsWith("Which of the following numbers are primes: ")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const primes = numbers.filter((number) => isPrime(number));
+
+    if (primes.length === 0) {
+      return "No prime numbers found.";
+    }
+
+    return primes.join(", ");
+  }
+
+  function isPrime(number: number): boolean {
+    if (number < 2) {
+      return false;
+    }
+
+    for (let i = 2; i <= Math.sqrt(number); i++) {
+      if (number % i === 0) {
+        return false;
+      }
+    }
+
+    return true;
+    }
   return "";
 }
