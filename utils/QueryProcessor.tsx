@@ -15,7 +15,7 @@ export default function QueryProcessor(query: string): string {
     const largestNumber = Math.max(...numbers);
     return largestNumber.toString();
     }
-  if  (query.startsWith("What is ")){
+  if  (query.startsWith("What is ") && query.includes("plus")){
     const numRegex = /\d+/g;
     const numbers = query.match(numRegex)?.map(Number) ?? [];
     const sum = numbers.reduce((acc, cur) => acc + cur, 0);
@@ -35,6 +35,12 @@ export default function QueryProcessor(query: string): string {
     }
 
     return "";
+  }
+  if  (query.startsWith("What is ") && query.includes("multiplied by")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const prod = numbers.reduce((acc, cur) => acc * cur, 1);
+    return prod.toString();
   }
   return "";
 }
