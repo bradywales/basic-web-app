@@ -9,11 +9,10 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("what is your name?")) {
     return ("Brady");
   }
-  if (query.includes("Which of the following numbers is the largest: 73, 70, 99?")) {
-    return ("99");
-  }
-  if (query.includes("What is 2 plus 51?")){
-    return ("53");
-  }
+  if (query.startsWith("Which of the following numbers is the largest: ")){
+      const numRegex = /\d+/g;
+      const numbers = query.match(numRegex).map(Number);
+      return (Math.max(...numbers)).toString();
+    }
   return "";
 }
