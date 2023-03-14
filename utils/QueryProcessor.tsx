@@ -15,5 +15,11 @@ export default function QueryProcessor(query: string): string {
     const largestNumber = Math.max(...numbers);
     return largestNumber.toString();
     }
+  if  (query.startsWith("What is ")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+    return sum.toString();
+  }
   return "";
 }
