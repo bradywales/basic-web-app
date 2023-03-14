@@ -21,6 +21,12 @@ export default function QueryProcessor(query: string): string {
     const sum = numbers.reduce((acc, cur) => acc + cur, 0);
     return sum.toString();
   }
+  if  (query.startsWith("What is ") && query.includes("minus")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const sum = numbers[0] - numbers[1];
+    return sum.toString();
+  }
   if (query.startsWith("Which of the following numbers is both a square and a cube: ")){
     const numRegex = /\d+/g;
     const numbers = query.match(numRegex)?.map(Number) ?? [];
@@ -40,6 +46,12 @@ export default function QueryProcessor(query: string): string {
     const numRegex = /\d+/g;
     const numbers = query.match(numRegex)?.map(Number) ?? [];
     const prod = numbers.reduce((acc, cur) => acc * cur, 1);
+    return prod.toString();
+  }
+  if  (query.startsWith("What is ") && query.includes("divided by")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const prod = numbers[0] / numbers[1];
     return prod.toString();
   }
   if (query.startsWith("Which of the following numbers are primes: ")){
