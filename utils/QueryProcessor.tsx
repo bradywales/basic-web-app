@@ -66,6 +66,13 @@ export default function QueryProcessor(query: string): string {
     return primes.join(", ");
   }
 
+  if (query.includes("to the power of")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const prod = numbers[0] ** numbers[1];
+    return prod.toString();
+  }
+
   function isPrime(number: number): boolean {
     if (number < 2) {
       return false;
