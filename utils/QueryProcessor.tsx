@@ -72,6 +72,12 @@ export default function QueryProcessor(query: string): string {
     const prod = numbers[0] ** numbers[1];
     return prod.toString();
   }
+  if (query.includes("mod")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const prod = numbers[0] % numbers[1];
+    return prod.toString();
+  }
 
   function isPrime(number: number): boolean {
     if (number < 2) {
