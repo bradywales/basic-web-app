@@ -21,5 +21,20 @@ export default function QueryProcessor(query: string): string {
     const sum = numbers.reduce((acc, cur) => acc + cur, 0);
     return sum.toString();
   }
+  if (query.startsWith("Which of the following numbers is both a square and a cube: ")){
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+
+    for (const number of numbers) {
+      const isSquare = Number.isInteger(Math.sqrt(number));
+      const isCube = Number.isInteger(Math.cbrt(number));
+
+      if (isSquare && isCube) {
+        return number.toString();
+      }
+    }
+
+    return "";
+  }
   return "";
 }
