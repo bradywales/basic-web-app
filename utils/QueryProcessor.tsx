@@ -10,9 +10,10 @@ export default function QueryProcessor(query: string): string {
     return ("Brady");
   }
   if (query.startsWith("Which of the following numbers is the largest: ")){
-      const numRegex = /\d+/g;
-      const numbers = query.match(numRegex).map(Number);
-      return (Math.max(...numbers)).toString();
+    const numRegex = /\d+/g;
+    const numbers = query.match(numRegex)?.map(Number) ?? [];
+    const largestNumber = Math.max(...numbers);
+    return largestNumber.toString();
     }
   return "";
 }
